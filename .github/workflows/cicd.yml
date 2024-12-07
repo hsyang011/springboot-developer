@@ -50,10 +50,13 @@ jobs:
           echo "$PRIVATE_KEY" > private_key.pem
           chmod 600 private_key.pem
 
+          # ~/.ssh 디렉토리 생성
+          mkdir -p ~/.ssh
+
           # EC2 서버의 호스트 키를 known_hosts에 추가
           ssh-keyscan -H $HOST >> ~/.ssh/known_hosts
 
-          # EC2 서버에서 배포 디렉토리가 없으면 생성 (이미 존재하면 무시)
+          # EC2 서버에서 배포 디렉토리가 없으면 생성
           ssh -i private_key.pem $USER@$HOST "mkdir -p /home/$USER/app"
 
           # EC2 서버에 배포 파일 전송
@@ -61,4 +64,5 @@ jobs:
 
           # EC2 서버에서 애플리케이션 실행
           ssh -i private_key.pem $USER@$HOST "java -jar /home/$USER/app/$ARTIFACT"
+      
       
