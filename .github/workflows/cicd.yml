@@ -54,12 +54,11 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -H $HOST >> ~/.ssh/known_hosts
 
-          # EC2 서버에서 애플리케이션 디렉토리 준비 (디렉토리가 없으면 생성)
-          ssh -i private_key.pem $USER@$HOST "mkdir -p /home/$USER/app"
+          # 기존 /home/$USER/app 삭제 및 디렉토리 생성
+          ssh -i private_key.pem $USER@$HOST 'sudo rm -rf /home/$USER/app && sudo mkdir -p /home/$USER/app && sudo chmod 755 /home/$USER/app'
 
           # EC2 서버에 배포 파일 전송
           scp -i private_key.pem ./build/libs/$ARTIFACT $USER@$HOST:/home/$USER/app/
 
           # EC2 서버에서 애플리케이션 실행
           ssh -i private_key.pem $USER@$HOST "java -jar /home/$USER/app/$ARTIFACT"
-      
