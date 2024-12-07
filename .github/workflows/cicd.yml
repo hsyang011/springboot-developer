@@ -56,13 +56,11 @@ jobs:
           # EC2 서버의 호스트 키를 known_hosts에 추가
           ssh-keyscan -H $HOST >> ~/.ssh/known_hosts
 
-          # EC2 서버에서 배포 디렉토리가 없으면 생성
-          ssh -i private_key.pem $USER@$HOST "mkdir -p /home/$USER/app"
+          # EC2 서버에서 배포 디렉토리가 없으면 생성 (디렉토리 존재 여부 체크 후 생성)
+          ssh -i private_key.pem $USER@$HOST "if [ ! -d /home/$USER/app ]; then mkdir -p /home/$USER/app; fi"
 
           # EC2 서버에 배포 파일 전송
           scp -i private_key.pem ./build/libs/$ARTIFACT $USER@$HOST:/home/$USER/app/
 
           # EC2 서버에서 애플리케이션 실행
           ssh -i private_key.pem $USER@$HOST "java -jar /home/$USER/app/$ARTIFACT"
-      
-      
