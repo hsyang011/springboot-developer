@@ -41,5 +41,4 @@ bin/
 ### Mac OS ###
 .DS_Store
 
-/src/main/resources/application.yml
 /src/main/resources/client_secret_80209959826-9rht6dj3kmrs73lqdfkrts7pdfaa8ue1.apps.googleusercontent.com.json
