@@ -66,7 +66,7 @@ jobs:
           echo "$PRIVATE_KEY" > private_key.pem
           chmod 600 private_key.pem  # SSH 키에 권한 설정
           
-          # ~/.ssh 디렉토리가 없으면 생성
+          # ~/.ssh 디렉토리가 없으면 생성 
           mkdir -p ~/.ssh
           
           # EC2 서버의 호스트 키를 known_hosts에 추가
