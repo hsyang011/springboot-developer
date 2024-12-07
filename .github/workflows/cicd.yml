@@ -36,7 +36,7 @@ jobs:
           echo "artifact=$(ls ./build/libs/*.jar | head -n 1)" >> $GITHUB_ENV
 
       - name: Debug artifact
-        run:
+        run: |
           echo "Deploying artifact: ${{ env.artifact }}"
 
       - name: Deploy to EC2
