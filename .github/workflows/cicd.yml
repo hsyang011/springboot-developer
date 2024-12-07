@@ -73,7 +73,7 @@ jobs:
           ssh-keyscan -H $HOST >> ~/.ssh/known_hosts
           
           # EC2 서버에 배포 파일 전송
-          scp -i private_key.pem ./build/libs/$ARTIFACT $USER@$HOST:/home/$USER/app/
+          scp -i private_key.pem ./build/libs/$ARTIFACT $USER@$HOST:/home/$USER/app
           
           # EC2 서버에서 애플리케이션 실행
           ssh -i private_key.pem $USER@$HOST "java -jar /home/$USER/app/$ARTIFACT"
